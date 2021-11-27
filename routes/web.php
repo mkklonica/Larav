@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BookController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,20 +17,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('hello')->group(function () {
-    Route::get('/world', function () {
-        echo "Witaj w świecie";
-    });
-    Route::get('/{name?}/{age?}', function (String $name = "Nieznajomy", int $age = null) {
-    // ? po nazwach parametrów definiuje, że parametr jest opcjonalny 
-        echo "Siema ".$name;
-            if (is_null($age))
-                echo ". Nie podałeś wieku";
-            else 
-                echo ", masz ".$age." lat";
-    });
-});
-Route::redirect('/witaj', '/hello/world'); // przekierwoanie rzadania adresu 
+// Route::resource('books', 'BookController');
+Route::get('/books', [BookController::class, 'index']);
+Route::get('onlyjson', function (){
+    //
+})->middleware('isjson');
+
+// Route::prefix('hello')->group(function () {
+//     Route::get('/world', function () {
+//         echo "Witaj w świecie";
+//     });
+//     Route::get('/{name?}/{age?}', function (String $name = "Nieznajomy", int $age = null) {
+//     // ? po nazwach parametrów definiuje, że parametr jest opcjonalny 
+//         echo "Siema ".$name;
+//             if (is_null($age))
+//                 echo ". Nie podałeś wieku";
+//             else 
+//                 echo ", masz ".$age." lat";
+//     });
+// });
+// Route::redirect('/witaj', '/hello/world'); // przekierwoanie rzadania adresu 
     // })->name('yoString');
 
                         //przypisanie danej trasie jednoznacznej nazwy, np do przekierowań

@@ -13,7 +13,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        echo "Tu znajdzie sie lista ksiazek";
+        echo 'Tu znajdzie sie lista ksiazek';
         die();
     }
 
